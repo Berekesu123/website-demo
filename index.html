@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solaada Solar &mdash; Power Day and Night, Weija Junction</title>
+<meta name="description" content="Solaada Solar provides residential and commercial solar installation, battery backup, and maintenance in Weija Junction, Accra, Ghana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-navy:#0B1938;
+    --night-navy-deep:#060E24;
+    --solar-gold:#FFB627;
+    --solar-gold-soft:#FFD988;
+    --ember:#FF6B35;
+    --cloud:#FFFFFF;
+    --paper:#FAFBFD;
+    --ink:#141B2E;
+    --ink-soft:#4C5670;
+    --line:#E7EAF2;
+    --sand:#FFF3DE;
+    --shadow: 0 20px 45px -20px rgba(11,25,56,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ember);
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:2px;background:var(--ember);display:inline-block;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  section{padding:110px 0;}
+  @media (max-width:780px){ section{padding:72px 0;} }
+
+  :focus-visible{ outline:3px solid var(--ember); outline-offset:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,251,253,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:background .3s ease;
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Sora',sans-serif;font-weight:800;font-size:21px;color:var(--night-navy);
+  }
+  .logo .dot{
+    width:14px;height:14px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--solar-gold-soft), var(--ember) 75%);
+    box-shadow:0 0 0 4px rgba(255,182,39,0.18);
+  }
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{
+    font-size:14.5px;font-weight:600;color:var(--ink-soft);
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--night-navy);}
+  .nav-cta{
+    display:flex;align-items:center;gap:16px;
+  }
+  .phone-pill{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:13.5px;font-weight:700;
+    color:var(--night-navy);
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 24px;border-radius:8px;
+    font-weight:700;font-size:14.5px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{
+    background:var(--ember);color:#fff;
+    box-shadow:0 10px 24px -8px rgba(255,107,53,0.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(255,107,53,0.65);}
+  .btn-ghost{
+    background:transparent;color:var(--night-navy);border:1.5px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--night-navy);}
+  .btn-light{background:#fff;color:var(--night-navy);}
+  .btn-light:hover{transform:translateY(-2px);}
+  .mobile-toggle{display:none;background:none;border:none;}
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .mobile-toggle{display:block;}
+  }
+
+  /* ---------- HERO with day/night toggle ---------- */
+  .hero{
+    position:relative;
+    padding-top:180px;padding-bottom:100px;
+    min-height:100vh;
+    display:flex;align-items:center;
+    background:linear-gradient(160deg,#FFF8EA 0%, #FFEBC7 38%, #FFD98A 100%);
+    transition:background 1.1s ease;
+    overflow:hidden;
+  }
+  .hero.night-mode{
+    background:linear-gradient(160deg,var(--night-navy-deep) 0%, var(--night-navy) 55%, #142449 100%);
+  }
+  .hero-rays{
+    position:absolute;top:-30%;right:-10%;width:900px;height:900px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,182,39,0.55) 0%, rgba(255,182,39,0.12) 45%, transparent 70%);
+    animation:pulse 8s ease-in-out infinite;
+    transition:opacity 1s ease, background 1.1s ease;
+  }
+  .hero.night-mode .hero-rays{
+    background:radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 45%, transparent 70%);
+  }
+  @keyframes pulse{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.06);} }
+  .stars{
+    position:absolute;inset:0;opacity:0;transition:opacity 1s ease;pointer-events:none;
+  }
+  .hero.night-mode .stars{opacity:1;}
+  .star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:0.8;}
+
+  .hero-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero h1{
+    font-size:clamp(36px,5vw,58px);
+    line-height:1.05;
+    color:var(--night-navy);
+    transition:color 1s ease;
+  }
+  .hero.night-mode h1{color:#fff;}
+  .hero p.lead{
+    font-size:18px;max-width:480px;margin-top:22px;color:var(--ink-soft);
+    transition:color 1s ease;
+  }
+  .hero.night-mode p.lead{color:#C9D3EC;}
+
+  .day-night-toggle{
+    display:inline-flex;align-items:center;gap:12px;
+    background:rgba(255,255,255,0.6);
+    border:1px solid rgba(11,25,56,0.12);
+    padding:8px 14px;border-radius:999px;
+    margin-bottom:28px;
+    transition:background 1s ease, border-color 1s ease;
+  }
+  .hero.night-mode .day-night-toggle{
+    background:rgba(255,255,255,0.06);
+    border-color:rgba(255,255,255,0.16);
+  }
+  .toggle-label{font-size:13px;font-weight:700;color:var(--night-navy);transition:color 1s ease;}
+  .hero.night-mode .toggle-label{color:#C9D3EC;}
+  .toggle-label.active{color:var(--ember);}
+  .switch{
+    position:relative;width:52px;height:28px;border-radius:999px;
+    background:linear-gradient(90deg, var(--solar-gold), var(--ember));
+    cursor:pointer;
+  }
+  .hero.night-mode .switch{background:linear-gradient(90deg,#243A6B,#0B1938);}
+  .switch input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;margin:0;}
+  .knob{
+    position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:transform .35s cubic-bezier(.4,1.4,.6,1);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  .hero.night-mode .knob{transform:translateX(24px);}
+
+  .hero-cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+
+  .hero-stats{
+    display:flex;gap:30px;margin-top:52px;flex-wrap:wrap;
+  }
+  .stat{border-left:3px solid var(--ember);padding-left:14px;}
+  .stat .num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:var(--night-navy);transition:color 1s ease;}
+  .hero.night-mode .stat .num{color:#fff;}
+  .stat .lbl{font-size:12.5px;color:var(--ink-soft);transition:color 1s ease;}
+  .hero.night-mode .stat .lbl{color:#9AA8CC;}
+
+  .hero-visual{
+    position:relative;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .panel-card{
+    position:relative;width:100%;max-width:420px;
+    background:rgba(255,255,255,0.9);
+    border-radius:18px;padding:26px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(6px);
+  }
+  .hero.night-mode .panel-card{background:rgba(20,32,64,0.75);}
+  .panel-card svg{width:100%;height:auto;}
+  .panel-caption{
+    margin-top:16px;font-size:13.5px;color:var(--ink-soft);text-align:center;
+    transition:color 1s ease;
+  }
+  .hero.night-mode .panel-caption{color:#9AA8CC;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
+  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:16px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--cloud);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+  .about-art{
+    aspect-ratio:1/1;border-radius:20px;
+    background:linear-gradient(150deg,#FFF3DE,#FFD98A 70%, #FF6B35 130%);
+    position:relative;overflow:hidden;
+  }
+  .about-art .sun{
+    position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
+    width:70%;aspect-ratio:1/1;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #FFE9B8, #FFB627 60%, #FF6B35 100%);
+    box-shadow:0 0 90px 20px rgba(255,182,39,0.5);
+  }
+  .about-text p{color:var(--ink-soft);margin-bottom:16px;font-size:15.5px;}
+  .about-signature{
+    margin-top:26px;padding:18px 20px;border-left:3px solid var(--ember);
+    background:var(--sand);border-radius:0 10px 10px 0;font-size:14.5px;color:var(--ink);
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--paper);}
+  .service-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  @media (max-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--cloud);border:1px solid var(--line);border-radius:16px;
+    padding:32px 26px;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent;}
+  .service-icon{
+    width:52px;height:52px;border-radius:12px;
+    background:linear-gradient(135deg,var(--solar-gold),var(--ember));
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .service-icon svg{width:26px;height:26px;stroke:#fff;fill:none;}
+  .service-card h3{font-size:18px;margin-bottom:10px;}
+  .service-card p{font-size:14px;color:var(--ink-soft);}
+
+  /* ---------- WHY US ---------- */
+  .why{background:var(--night-navy);color:#fff;position:relative;overflow:hidden;}
+  .why::before{
+    content:"";position:absolute;top:-20%;left:-10%;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,182,39,0.14), transparent 65%);
+  }
+  .why .section-head h2{color:#fff;}
+  .why .section-head p{color:#B7C2E2;}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;position:relative;z-index:2;}
+  @media (max-width:760px){.why-grid{grid-template-columns:1fr;}}
+  .why-item{
+    display:flex;gap:16px;padding:22px;border-radius:14px;
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
+  }
+  .why-item .mark{
+    flex:none;width:38px;height:38px;border-radius:50%;
+    background:rgba(255,182,39,0.16);color:var(--solar-gold);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Space Mono',monospace;
+  }
+  .why-item h4{color:#fff;font-size:16px;margin-bottom:6px;}
+  .why-item p{color:#AEBBDC;font-size:14px;}
+
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--cloud);}
+  .process-track{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;
+  }
+  @media (max-width:960px){.process-track{grid-template-columns:1fr;gap:28px;}}
+  .process-track::before{
+    content:"";position:absolute;top:26px;left:6%;right:6%;height:2px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 16px);
+  }
+  @media (max-width:960px){.process-track::before{display:none;}}
+  .step{position:relative;padding:0 14px;text-align:left;}
+  .step-num{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--cloud);border:2px solid var(--ember);color:var(--ember);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Mono',monospace;font-weight:700;font-size:18px;
+    position:relative;z-index:2;margin-bottom:18px;
+  }
+  .step h4{font-size:15.5px;margin-bottom:8px;}
+  .step p{font-size:13px;color:var(--ink-soft);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--sand);}
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:900px){.t-grid{grid-template-columns:1fr;}}
+  .t-card{
+    background:var(--cloud);border-radius:16px;padding:30px;box-shadow:var(--shadow);
+  }
+  .t-quote{font-size:15px;color:var(--ink);margin-bottom:20px;}
+  .t-person{display:flex;align-items:center;gap:12px;}
+  .t-avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:linear-gradient(135deg,var(--solar-gold),var(--ember));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:'Sora',sans-serif;
+  }
+  .t-name{font-weight:700;font-size:14px;}
+  .t-loc{font-size:12.5px;color:var(--ink-soft);}
+  .stars-row{color:var(--solar-gold);font-size:14px;margin-bottom:10px;letter-spacing:2px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--paper);}
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:50px;}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-card{
+    background:var(--night-navy);color:#fff;border-radius:18px;padding:40px 34px;
+  }
+  .contact-card h3{color:#fff;font-size:22px;margin-bottom:22px;}
+  .contact-row{display:flex;gap:14px;margin-bottom:22px;align-items:flex-start;}
+  .contact-row .ic{
+    flex:none;width:40px;height:40px;border-radius:10px;background:rgba(255,182,39,0.14);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .contact-row .ic svg{width:19px;height:19px;stroke:var(--solar-gold);fill:none;}
+  .contact-row .label{font-size:12px;color:#9AA8CC;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+  .contact-row .value{font-size:15.5px;font-weight:600;}
+  .contact-row a.value:hover{color:var(--solar-gold);}
+  .map-embed{
+    margin-top:26px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.14);
+  }
+  .map-embed iframe{width:100%;height:180px;border:0;display:block;filter:grayscale(0.15) contrast(1.05);}
+  .whatsapp-btn{
+    margin-top:24px;width:100%;background:#25D366;color:#fff;padding:13px;border-radius:9px;
+    font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:9px;
+  }
+
+  .form-card{background:var(--cloud);border:1px solid var(--line);border-radius:18px;padding:40px 34px;}
+  .form-card h3{font-size:22px;margin-bottom:8px;}
+  .form-card > p{color:var(--ink-soft);font-size:14.5px;margin-bottom:26px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  @media (max-width:560px){.form-row{grid-template-columns:1fr;}}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  .field label{font-size:13px;font-weight:600;color:var(--ink);}
+  .field input, .field select, .field textarea{
+    padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;font-family:inherit;font-size:14.5px;
+    background:#fff;color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--ember);outline:none;}
+  .field textarea{resize:vertical;min-height:100px;}
+  .form-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--night-navy-deep);color:#9AA8CC;padding:56px 0 26px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:40px;}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  .footer-grid h5{color:#fff;font-size:13.5px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;font-family:'Sora',sans-serif;}
+  .footer-grid ul li{margin-bottom:10px;font-size:14px;}
+  .footer-grid ul li a:hover{color:#fff;}
+  .footer-logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:20px;color:#fff;margin-bottom:14px;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo"><span class="dot"></span>Solaada</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#process">Process</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <span class="phone-pill">📞 027 121 0210</span>
+      <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-rays"></div>
+  <div class="stars" id="stars"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="day-night-toggle">
+        <span class="toggle-label active" id="dayLabel">☀️ Day</span>
+        <label class="switch">
+          <input type="checkbox" id="modeToggle" aria-label="Toggle day and night view">
+          <span class="knob" id="knob">☀️</span>
+        </label>
+        <span class="toggle-label" id="nightLabel">🌙 Night</span>
+      </div>
+      <h1 id="heroHeadline">Power that works<br>day <em>and</em> night.</h1>
+      <p class="lead" id="heroLead">Solaada designs, installs, and maintains solar power systems for homes and businesses across Weija Junction and the Greater Accra Region &mdash; so the sun works for you long after it sets.</p>
+      <div class="hero-cta-row">
+        <a href="tel:0271210210" class="btn btn-primary">Call 027 121 0210</a>
+        <a href="#services" class="btn btn-ghost">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">100%</div><div class="lbl">Locally based in Weija</div></div>
+        <div class="stat"><div class="num">24/7</div><div class="lbl">Battery backup support</div></div>
+        <div class="stat"><div class="num">1–2</div><div class="lbl">Day site assessment</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="panel-card">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="360" height="180" rx="10" fill="#0B1938"/>
+          <g stroke="#FFB627" stroke-width="2">
+            <line x1="20" y1="85" x2="380" y2="85"/>
+            <line x1="20" y1="130" x2="380" y2="130"/>
+            <line x1="20" y1="175" x2="380" y2="175"/>
+            <line x1="110" y1="40" x2="110" y2="220"/>
+            <line x1="200" y1="40" x2="200" y2="220"/>
+            <line x1="290" y1="40" x2="290" y2="220"/>
+          </g>
+          <circle cx="330" cy="70" r="14" fill="#FFD988" opacity="0.9"/>
+          <rect x="150" y="235" width="100" height="14" rx="7" fill="#FF6B35"/>
+          <rect x="170" y="249" width="60" height="24" rx="4" fill="#FF6B35"/>
+        </svg>
+        <p class="panel-caption">Rooftop solar array &middot; battery storage &middot; smart monitoring</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-art reveal"><div class="sun"></div></div>
+    <div class="about-text reveal">
+      <div class="eyebrow">About Solaada</div>
+      <h2>Reliable power, built for Ghana's sun &mdash; and Ghana's grid.</h2>
+      <p>Solaada was founded to give homes and businesses in Weija Junction and beyond a dependable alternative to an unpredictable grid. We size, design, and install solar systems using the abundant sunlight in the Greater Accra Region, paired with battery storage that keeps essentials running through outages.</p>
+      <p>From a single rooftop system for a family home to larger arrays for shops, schools, and offices, our team handles site assessment, system design, installation, and after-sales maintenance &mdash; all from our base at Weija Junction.</p>
+      <div class="about-signature">
+        <strong>Our promise:</strong> the sun does the collecting during the day; your battery does the delivering at night. That's the whole idea behind Solaada.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2>Solar solutions for every roof and every budget</h2>
+      <p>Every system is sized around how your household or business actually uses power &mdash; not a one-size-fits-all package.</p>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>Residential Installation</h3>
+        <p>Rooftop solar systems sized to your home's daily usage, from lighting and fans to fridges and TVs.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>Commercial &amp; Industrial</h3>
+        <p>Larger arrays for shops, offices, schools, and small factories &mdash; built to cut running costs at scale.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M7 2h6l-1 8h4l-8 12 2-9H6z" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>Battery &amp; Backup Systems</h3>
+        <p>Store daytime solar energy and keep essential appliances running through evening outages.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke-width="1.8"/></svg></div>
+        <h3>Solar Water Heating</h3>
+        <p>Cut your water-heating bill with solar thermal systems suited to household and guest-house use.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 20a8 8 0 100-16 8 8 0 000 16zM12 8v4l3 2" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Maintenance &amp; Repair</h3>
+        <p>Panel cleaning, inverter checks, and battery health reviews to keep your system performing for years.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Site Assessment &amp; Consultation</h3>
+        <p>Free on-site visit to evaluate your roof, power needs, and budget before we recommend a system.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why Solaada</div>
+      <h2>Local team, honest sizing, real after-sales support</h2>
+      <p>We're based right at Weija Junction &mdash; not a call centre in another city.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="mark">✓</div>
+        <div><h4>Based at Weija Junction</h4><p>Fast response times for installation, servicing, and emergency call-outs across the area.</p></div>
+      </div>
+      <div class="why-item reveal">
+        <div class="mark">✓</div>
+        <div><h4>Right-sized systems</h4><p>We size your system to your actual appliances and habits, not an oversized package you don't need.</p></div>
+      </div>
+      <div class="why-item reveal">
+        <div class="mark">✓</div>
+        <div><h4>Warranty on installations</h4><p>Workmanship and equipment warranties, with a clear maintenance schedule after handover.</p></div>
+      </div>
+      <div class="why-item reveal">
+        <div class="mark">✓</div>
+        <div><h4>Flexible payment plans</h4><p>Options to spread the cost of your system, discussed openly during your free consultation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2>From first call to full power, in five steps</h2>
+    </div>
+    <div class="process-track">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h4>Consultation &amp; site visit</h4>
+        <p>We visit your home or business at Weija Junction (or nearby) to assess roof space and power needs.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h4>Custom system design</h4>
+        <p>We size panels, inverter, and battery storage around your actual appliances and budget.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h4>Professional installation</h4>
+        <p>Our technicians install the full system with minimal disruption to your routine.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <h4>Testing &amp; handover</h4>
+        <p>We test every component and walk you through how to monitor and use your system.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">5</div>
+        <h4>Ongoing support</h4>
+        <p>Scheduled maintenance visits and a direct line to our team whenever you need us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Customer Stories</div>
+      <h2>What our customers say</h2>
+      <p>Sample feedback &mdash; replace with real customer quotes as they come in.</p>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <div class="stars-row">★★★★★</div>
+        <p class="t-quote">"Since the installation, our shop no longer shuts down when the power goes off. The team was on time and explained everything clearly."</p>
+        <div class="t-person">
+          <div class="t-avatar">A</div>
+          <div><div class="t-name">Ama O.</div><div class="t-loc">Weija</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars-row">★★★★★</div>
+        <p class="t-quote">"They sized the system properly instead of selling us more than we needed. Our electricity costs dropped noticeably."</p>
+        <div class="t-person">
+          <div class="t-avatar">K</div>
+          <div><div class="t-name">Kwabena T.</div><div class="t-loc">Mallam</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars-row">★★★★★</div>
+        <p class="t-quote">"Quick response for a maintenance check and very friendly service. Would recommend to anyone near Weija Junction."</p>
+        <div class="t-person">
+          <div class="t-avatar">E</div>
+          <div><div class="t-name">Efua D.</div><div class="t-loc">Bortianor</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Let's design your solar system</h2>
+      <p>Book a free site assessment or ask us any question &mdash; we respond quickly.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3>Contact details</h3>
+
+        <div class="contact-row">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.35 1.79.68 2.63a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.84.33 1.73.56 2.63.68A2 2 0 0122 16.92z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="label">Phone</div><a class="value" href="tel:0271210210">027 121 0210</a></div>
+        </div>
+
+        <div class="contact-row">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div><div class="label">Email</div><a class="value" href="mailto:ahkosuah200@gmail.com">ahkosuah200@gmail.com</a></div>
+        </div>
+
+        <div class="contact-row">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.4 7-12a7 7 0 10-14 0c0 5.6 7 12 7 12z" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke-width="1.8"/></svg></div>
+          <div><div class="label">Location</div><div class="value">Weija Junction, Accra, Ghana</div></div>
+        </div>
+
+        <a class="whatsapp-btn" href="https://wa.me/233271210210" target="_blank" rel="noopener">💬 Chat with us on WhatsApp</a>
+
+        <div class="map-embed">
+          <iframe src="https://maps.google.com/maps?q=Weija%20Junction%2C%20Accra%2C%20Ghana&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Map of Weija Junction, Accra"></iframe>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h3>Request a free quote</h3>
+        <p>Fill this in and it will open in your email app addressed to us &mdash; no account needed.</p>
+        <form action="mailto:ahkosuah200@gmail.com" method="get" enctype="text/plain">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" placeholder="0XX XXX XXXX" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="location">Property location</label>
+            <input id="location" name="location" type="text" placeholder="e.g. Weija, Mallam, Bortianor">
+          </div>
+          <div class="field">
+            <label for="type">What are you looking for?</label>
+            <select id="type" name="subject">
+              <option>Residential solar installation</option>
+              <option>Commercial / industrial solar</option>
+              <option>Battery backup system</option>
+              <option>Solar water heating</option>
+              <option>Maintenance &amp; repair</option>
+              <option>Not sure yet — advise me</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Tell us about your power needs</label>
+            <textarea id="message" name="body" placeholder="e.g. Number of rooms, appliances you want to run, current monthly power bill..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Request</button>
+          <p class="form-note">This opens your device's email app addressed to ahkosuah200@gmail.com. Prefer to talk? Call 027 121 0210.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><span class="dot" style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#FFD988,#FF6B35);display:inline-block;"></span>Solaada</div>
+        <p style="font-size:14px;max-width:280px;">Solar installation, battery backup, and maintenance based at Weija Junction, serving the Greater Accra Region.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why Solaada</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Residential Solar</a></li>
+          <li><a href="#services">Commercial Solar</a></li>
+          <li><a href="#services">Battery Backup</a></li>
+          <li><a href="#services">Maintenance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:0271210210">027 121 0210</a></li>
+          <li><a href="mailto:ahkosuah200@gmail.com">ahkosuah200@gmail.com</a></li>
+          <li>Weija Junction, Accra</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Solaada Solar. All rights reserved.</span>
+      <span>Built for reliable power, day and night.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Day / Night toggle — signature interaction
+  const hero = document.querySelector('.hero');
+  const toggle = document.getElementById('modeToggle');
+  const knob = document.getElementById('knob');
+  const dayLabel = document.getElementById('dayLabel');
+  const nightLabel = document.getElementById('nightLabel');
+  const headline = document.getElementById('heroHeadline');
+  const lead = document.getElementById('heroLead');
+
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 70 + '%';
+    s.style.opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
+    stars.appendChild(s);
+  }
+
+  toggle.addEventListener('change', () => {
+    const isNight = toggle.checked;
+    hero.classList.toggle('night-mode', isNight);
+    knob.textContent = isNight ? '🌙' : '☀️';
+    dayLabel.classList.toggle('active', !isNight);
+    nightLabel.classList.toggle('active', isNight);
+    headline.innerHTML = isNight
+      ? 'Stored sunlight,<br>working <em>all night</em>.'
+      : 'Power that works<br>day <em>and</em> night.';
+    lead.textContent = isNight
+      ? 'While the grid sleeps, your battery keeps essentials running — lights, fridge, Wi‑Fi — powered entirely by the sun you captured earlier that day.'
+      : 'Solaada designs, installs, and maintains solar power systems for homes and businesses across Weija Junction and the Greater Accra Region — so the sun works for you long after it sets.';
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

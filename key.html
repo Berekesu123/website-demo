@@ -1,0 +1,327 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solaada Energies</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1509391366360-2e959784a276');
+    background-size:cover;
+    background-position:center;
+    color:white;
+}
+
+#login{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    background:rgba(0,0,0,0.8);
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.login-box input{
+    padding:10px;
+    width:250px;
+    margin:10px;
+}
+
+.login-box button{
+    padding:10px 20px;
+    background:gold;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#website{
+    display:none;
+}
+
+header{
+    text-align:center;
+    padding:80px 20px;
+}
+
+header h1{
+    font-size:4rem;
+    color:gold;
+}
+
+header p{
+    font-size:1.3rem;
+    margin-top:10px;
+}
+
+section{
+    padding:50px 10%;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    padding:25px;
+    margin:20px 0;
+    border-radius:15px;
+}
+
+h2{
+    color:gold;
+    margin-bottom:20px;
+}
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.service-box{
+    background:rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+}
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.plan{
+    background:rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:rgba(0,0,0,0.7);
+}
+
+.whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px;
+    border-radius:50%;
+    text-decoration:none;
+    font-size:25px;
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+    <div class="login-box">
+        <h2>Welcome to Solaada Energies</h2>
+        <p>Enter Password</p>
+        <input type="password" id="password">
+        <br>
+        <button onclick="checkPassword()">Login</button>
+    </div>
+</div>
+
+<div id="website">
+
+<header>
+    <h1>SOLAADA ENERGIES</h1>
+    <p>Powering Ghana With Clean, Reliable & Sustainable Solar Energy</p>
+</header>
+
+<section>
+    <div class="card">
+        <h2>About Us</h2>
+        <p>
+            Solaada Energies is a leading solar energy company committed to
+            transforming homes and businesses through innovative renewable
+            energy solutions. We specialize in solar panel installations,
+            battery storage systems, solar street lights, inverters,
+            maintenance, and energy consultations.
+        </p>
+
+        <br>
+
+        <p>
+            Our mission is to provide affordable, efficient, and environmentally
+            friendly energy solutions that reduce electricity costs and promote
+            sustainability for future generations.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Our Services</h2>
+
+    <div class="services">
+
+        <div class="service-box">
+            <h3>Solar Panel Installation</h3>
+            <p>Residential and commercial solar systems.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>Battery Storage</h3>
+            <p>Reliable backup power solutions.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>Solar Street Lights</h3>
+            <p>Modern lighting solutions for communities.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>Maintenance & Repairs</h3>
+            <p>Professional servicing and inspections.</p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>Why Choose Solaada Energies?</h2>
+
+        <ul>
+            <li>✔ High-quality solar products</li>
+            <li>✔ Professional installation team</li>
+            <li>✔ Cost-saving energy solutions</li>
+            <li>✔ Reliable customer support</li>
+            <li>✔ Sustainable and eco-friendly technology</li>
+            <li>✔ Trusted by homes and businesses across Ghana</li>
+        </ul>
+
+        <br>
+
+        <p>
+            "At Solaada Energies, we don't just install solar systems —
+            we illuminate dreams, empower communities, and build a brighter,
+            greener future for generations to come."
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Pricing Plans</h2>
+
+    <div class="pricing">
+
+        <div class="plan">
+            <h3>Basic Package</h3>
+            <h1>Affordable</h1>
+            <p>Ideal for homes</p>
+        </div>
+
+        <div class="plan">
+            <h3>Business Package</h3>
+            <h1>Premium</h1>
+            <p>For offices and shops</p>
+        </div>
+
+        <div class="plan">
+            <h3>Industrial Package</h3>
+            <h1>Custom Quote</h1>
+            <p>Large-scale installations</p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>Customer Testimonials</h2>
+
+        <p>
+            ⭐⭐⭐⭐⭐ "Outstanding service and excellent installation."
+        </p>
+
+        <br>
+
+        <p>
+            ⭐⭐⭐⭐⭐ "My electricity bills have reduced significantly."
+        </p>
+
+        <br>
+
+        <p>
+            ⭐⭐⭐⭐⭐ "Professional team and quality equipment."
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>Project Gallery</h2>
+        <p>Add photos of your completed solar projects here.</p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>Google Maps Location</h2>
+        <p>Embed your Google Maps location here.</p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>Contact Us</h2>
+
+        <p><strong>Phone:</strong> +233271210210</p>
+        <p><strong>Email:</strong> info@solaadaenergies.com</p>
+
+        <br>
+
+        <p>
+            Ready to switch to clean energy?
+            Contact Solaada Energies today and let us help you power your
+            future with the limitless energy of the sun.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Solaada Energies | Solar Power For A Brighter Tomorrow</p>
+</footer>
+
+<a class="whatsapp"
+href="https://wa.me/233271210210"
+target="_blank">💬</a>
+
+</div>
+
+<script>
+function checkPassword(){
+    let password=document.getElementById("password").value;
+
+    if(password==="solaada"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("website").style.display="block";
+    }else{
+        alert("Incorrect Password");
+    }
+}
+</script>
+
+</body>
+</html>
+```
